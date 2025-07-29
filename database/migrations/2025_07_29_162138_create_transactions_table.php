@@ -12,24 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transactions', function (Blueprint $table) {
-    $table->id();
-    $table->string('customer_name');
-    $table->date('date');
-    $table->time('time');
-    $table->double('credit');
-    $table->double('bonus');
-    $table->double('loaded');
-    $table->double('free_play');
-    $table->text('remarks')->nullable();
-    $table->double('reedem');
-    $table->double('tips');
-    $table->double('cashout');
-    $table->foreignId('source_id')->constrained('sources');
-    $table->foreignId('platform')->constrained('platfroms');
-    $table->foreignId('tag_id')->constrained('tags');
-    $table->foreignId('employee_id')->constrained('employees');
-    $table->timestamps();
-});
+            $table->id();
+            $table->string('customer_name');
+            $table->date('date');
+            $table->time('time');
+            $table->decimal('credit', 10, 2);
+            $table->decimal('bonus', 10, 2);
+            $table->decimal('loaded', 10, 2);
+            $table->decimal('free_play', 10, 2);
+            $table->text('remarks')->nullable();
+            $table->decimal('redeem', 10, 2);
+            $table->decimal('tips', 10, 2);
+            $table->decimal('cashout', 10, 2);
+            $table->foreignId('source_id')->constrained('sources');
+            $table->foreignId('platform_id')->constrained('platforms');
+            $table->foreignId('tag_id')->constrained('tags');
+            $table->foreignId('employee_id')->constrained('employees');
+            $table->timestamps();
+        });
     }
 
     /**

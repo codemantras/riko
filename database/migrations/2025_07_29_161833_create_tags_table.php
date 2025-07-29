@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('username'); // varchar2 adjusted to string
+            $table->string('username');
             $table->string('status');
             $table->string('priority');
             $table->text('remarks')->nullable();

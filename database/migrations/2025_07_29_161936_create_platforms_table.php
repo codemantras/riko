@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('platfroms', function (Blueprint $table) {
+        Schema::create('platforms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('url')->nullable();
-            $table->string('user_name');
+            $table->string('username');
             $table->string('password');
             $table->string('app_url')->nullable();
             $table->string('storage_id')->nullable();
