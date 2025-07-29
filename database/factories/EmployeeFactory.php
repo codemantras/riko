@@ -18,9 +18,9 @@ class EmployeeFactory extends Factory
      */
     public function definition(): array
     {
-        
+
         return [
-            'full_name' => fake()->name(),
+            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'username'=> fake()->unique()->userName(),
             'email_verified_at' => now(),
