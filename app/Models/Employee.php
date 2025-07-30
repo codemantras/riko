@@ -9,14 +9,15 @@ use Illuminate\Notifications\Notifiable;
 
 class Employee extends Authenticatable
 {
-     use HasFactory, Notifiable;
-   protected $fillable = [
+    use HasFactory, Notifiable;
+
+    protected $fillable = [
         'username',
         'email',
         'full_name',
         'password'
     ];
-     protected $hidden = [
+    protected $hidden = [
         'password',
         'remember_token',
     ];
