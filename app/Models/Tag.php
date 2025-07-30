@@ -18,4 +18,9 @@ class Tag extends Model
     {
         return $this->belongsTo(TagType::class);
     }
+    
+        public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

@@ -20,5 +20,10 @@ class Platform extends Model
     {
         return $this->belongsTo(Source::class);
     }
+    
+        public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
 }

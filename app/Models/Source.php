@@ -11,5 +11,9 @@ class Source extends Model
      {
           return $this->hasMany(Platform::class);
      }
+        public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
 }

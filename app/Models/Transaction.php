@@ -15,12 +15,28 @@ class Transaction extends Model
         'loaded',
         'free_play',
         'remarks',
-        'reedem',
+        'redeem',
         'tips',
         'cashout',
         'source_id',
-        'platform',
+        'platform_id',
         'tag_id',
         'employee_id'
     ];
+    public function source()
+    {
+        return $this->belongsTo(Source::class);
+    }
+    public function platform()
+    {
+        return $this->belongsTo(Platform::class);
+    }
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
+    }
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }
