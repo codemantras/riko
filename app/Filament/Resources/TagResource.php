@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SourceResource\Pages;
-use App\Filament\Resources\SourceResource\RelationManagers;
-use App\Models\Source;
+use App\Filament\Resources\TagResource\Pages;
+use App\Filament\Resources\TagResource\RelationManagers;
+use App\Models\Tag;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SourceResource extends Resource
+class TagResource extends Resource
 {
-    protected static ?string $model = Source::class;
+    protected static ?string $model = Tag::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -25,6 +25,19 @@ class SourceResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required(),
+                Forms\Components\TextInput::make('username')
+                    ->required(),
+                Forms\Components\TextInput::make('status')
+                    ->required(),
+                Forms\Components\TextInput::make('priority')
+                    ->required(),
+                Forms\Components\Textarea::make('remarks')
+                    ->columnSpanFull(),
+                Forms\Components\Select::make('tag_type_id')
+                    ->required()
+                    ->searchable()
+                    ->preload()
+                    ->relationship('tag_type','name')
             ]);
     }
 
@@ -34,6 +47,15 @@ class SourceResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('username')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('priority')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('tag_type_id')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -67,10 +89,10 @@ class SourceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSources::route('/'),
-            'create' => Pages\CreateSource::route('/create'),
-            'view' => Pages\ViewSource::route('/{record}'),
-            'edit' => Pages\EditSource::route('/{record}/edit'),
+            'index' => Pages\ListTags::route('/'),
+            'create' => Pages\CreateTag::route('/create'),
+            'view' => Pages\ViewTag::route('/{record}'),
+            'edit' => Pages\EditTag::route('/{record}/edit'),
         ];
     }
 }

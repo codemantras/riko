@@ -12,6 +12,15 @@ class Tag extends Model
         'status',
         'priority',
         'remarks',
-        'tag_type'
+        'tag_type_id'
     ];
+      public function tag_type()
+    {
+        return $this->belongsTo(TagType::class);
+    }
+    
+        public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

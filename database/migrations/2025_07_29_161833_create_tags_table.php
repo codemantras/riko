@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('priority');
             $table->text('remarks')->nullable();
-            $table->foreignId('tag_type')->constrained('tag_types');
+            $table->foreignId('tag_type_id')->constrained('tag_types');
             $table->timestamps();
         });
     }

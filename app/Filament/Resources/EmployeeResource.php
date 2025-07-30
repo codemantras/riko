@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SourceResource\Pages;
-use App\Filament\Resources\SourceResource\RelationManagers;
-use App\Models\Source;
+use App\Filament\Resources\EmployeeResource\Pages;
+use App\Filament\Resources\EmployeeResource\RelationManagers;
+use App\Models\Employee;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SourceResource extends Resource
+class EmployeeResource extends Resource
 {
-    protected static ?string $model = Source::class;
+    protected static ?string $model = Employee::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,7 +23,16 @@ class SourceResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('username')
+                    ->required(),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required(),
+                Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('name')
+                    ->required(),
+                Forms\Components\TextInput::make('password')
+                    ->password()
                     ->required(),
             ]);
     }
@@ -32,6 +41,13 @@ class SourceResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('username')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email_verified_at')
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -67,10 +83,10 @@ class SourceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSources::route('/'),
-            'create' => Pages\CreateSource::route('/create'),
-            'view' => Pages\ViewSource::route('/{record}'),
-            'edit' => Pages\EditSource::route('/{record}/edit'),
+            'index' => Pages\ListEmployees::route('/'),
+            'create' => Pages\CreateEmployee::route('/create'),
+            'view' => Pages\ViewEmployee::route('/{record}'),
+            'edit' => Pages\EditEmployee::route('/{record}/edit'),
         ];
     }
 }
