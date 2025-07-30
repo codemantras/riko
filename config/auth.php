@@ -66,7 +66,7 @@ return [
     'providers' => [
         'employees' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Employee::class,
+            'model' => env('AUTH_EMPLOYEE_MODEL', App\Models\Employee::class),
         ],
         'users' => [
             'driver' => 'eloquent',

@@ -2,16 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SourceResource\Pages;
+use App\Filament\Resources\SourceResource\Pages\CreateSource;
+use App\Filament\Resources\SourceResource\Pages\EditSource;
+use App\Filament\Resources\SourceResource\Pages\ListSources;
+use App\Filament\Resources\SourceResource\Pages\ViewSource;
 use App\Filament\Resources\SourceResource\RelationManagers;
 use App\Models\Source;
-use Filament\Forms;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SourceResource extends Resource
 {
@@ -23,7 +28,7 @@ class SourceResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required(),
             ]);
     }
@@ -32,13 +37,13 @@ class SourceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -47,12 +52,12 @@ class SourceResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                ViewAction::make(),
+                EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -67,10 +72,10 @@ class SourceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSources::route('/'),
-            'create' => Pages\CreateSource::route('/create'),
-            'view' => Pages\ViewSource::route('/{record}'),
-            'edit' => Pages\EditSource::route('/{record}/edit'),
+            'index' => ListSources::route('/'),
+            'create' => CreateSource::route('/create'),
+            'view' => ViewSource::route('/{record}'),
+            'edit' => EditSource::route('/{record}/edit'),
         ];
     }
 }
