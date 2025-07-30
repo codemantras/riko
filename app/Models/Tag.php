@@ -12,6 +12,6 @@ class Tag extends Model
         'status',
         'priority',
         'remarks',
-        'tag_type'
+        'tag_type_id'
     ];
 }
