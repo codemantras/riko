@@ -14,4 +14,8 @@ class Tag extends Model
         'remarks',
         'tag_type_id'
     ];
+      public function tag_type()
+    {
+        return $this->belongsTo(TagType::class);
+    }
 }
